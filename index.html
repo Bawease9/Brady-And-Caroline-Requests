@@ -58,23 +58,35 @@
   <div class="container">
     <img src="logo.png" alt="Brady & Caroline Logo" class="logo" />
     <h1>🎵 Make A Request 🎵</h1>
-    <form>
-      <label>Song Choice #1</label>
-      <input type="text" placeholder="Enter song title" />
-
-      <label>Song Choice #2</label>
-      <input type="text" placeholder="Enter song title" />
-
-      <label>Your Name/Special Dedication</label>
-      <input type="text" placeholder="Enter your name or message" />
-
-      <button type="submit">Submit Request</button>
-    <form action="https://sheetdb.io/api/v1/d8852m1f9bb64" method="POST">
+    <form id="requestForm">
   <input name="data[song1]" type="text" placeholder="Song Choice #1" required />
   <input name="data[song2]" type="text" placeholder="Song Choice #2" />
   <input name="data[dedication]" type="text" placeholder="Your Name / Special Dedication" />
   <button class="button" type="submit">Submit Request</button>
 </form>
+
+<p id="thankYouMessage" style="display:none; margin-top: 10px; font-weight: bold;">
+  🎶 Thanks! We got your request! We'll try to make it happen if we know it!
+</p>
+
+<script>
+  const form = document.getElementById('requestForm');
+  const thankYouMessage = document.getElementById('thankYouMessage');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+
+    const formData = new FormData(form);
+    fetch("https://sheetdb.io/api/v1/d8852m1f9bb64", {
+      method: "POST",
+      body: formData
+    }).then(function() {
+      form.reset(); // Clear the form
+      thankYouMessage.style.display = "block"; // Show thank you
+    });
+  });
+</script>
+
 
     <br/>
     <a href="https://venmo.com/Brady-Wease" target="_blank">
