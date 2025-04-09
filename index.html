@@ -90,7 +90,20 @@
 
     <br/>
     <a href="https://venmo.com/Brady-Wease" target="_blank">
-      <button class="tip-button">Tip via Venmo</button>
+      <button class="button tip-button" onclick="showVenmoThanks()">
+  Tip via Venmo
+</button>
+<p id="venmoThanks" style="display:none; margin-top: 10px; font-weight: bold;">
+  💸 Thanks! Tips are always appreciated!
+</p>
+
+<script>
+  function showVenmoThanks() {
+    document.getElementById('venmoThanks').style.display = "block";
+    window.open("https://venmo.com/Brady-Wease", "_blank");
+  }
+</script>
+
     </a>
   </div>
 </body>
