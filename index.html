@@ -98,6 +98,30 @@
         window.location.href = "thankyou.html";
       });
     });
+    <!-- Your form and content is here -->
+
+  <script>
+    const form = document.getElementById("requestForm");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // Stop the default form submission
+
+      fetch("https://sheetdb.io/api/v1/d8852m1f9bb64", {
+        method: "POST",
+        body: new FormData(form),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Success:", data);
+        window.location.href = "thankyou.html"; // redirect
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Something went wrong. Please try again!");
+      });
+    });
   </script>
+
 </body>
 </html>
+
