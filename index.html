@@ -71,21 +71,21 @@
 
 <script>
   const form = document.getElementById('requestForm');
-  const thankYouMessage = document.getElementById('thankYouMessage');
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); // Stop the default page reload
 
     const formData = new FormData(form);
     fetch("https://sheetdb.io/api/v1/d8852m1f9bb64", {
       method: "POST",
       body: formData
     }).then(function() {
-      form.reset(); // Clear the form
-      thankYouMessage.style.display = "block"; // Show thank you
+      // Redirect to thank you page after form is submitted
+      window.location.href = "thankyou.html";
     });
   });
 </script>
+
 
 
     <br/>
