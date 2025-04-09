@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brady & Caroline Requests</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #111;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 250px;
+      margin-top: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .music-notes {
+      font-size: 24px;
+      margin: 0 10px;
+    }
+
+    input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      background-color: #111;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .tip-button {
+      background-color: #3D95CE;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="logo.png" alt="Brady and Caroline Logo" class="logo" />
+
+  <div class="container">
+    <h1>
+      <span class="music-notes">🎵</span>
+      Make A Request
+      <span class="music-notes">🎵</span>
+    </h1>
+
+    <form>
+      <input type="text" placeholder="Song Choice #1" required />
+      <input type="text" placeholder="Song Choice #2" />
+      <input type="text" placeholder="Your Name / Special Dedication" />
+
+      <button class="button" type="submit">Submit Request</button>
+    </form>
+
+    <a href="https://venmo.com/Brady-Wease" target="_blank">
+      <button class="button tip-button">Tip via Venmo</button>
+    </a>
+  </div>
+
+</body>
+</html>
