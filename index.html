@@ -79,5 +79,38 @@
 
     <a class="venmo-button" href="https://venmo.com/Brady-Wease" target="_blank">💸 Tip via Venmo</a>
   </div>
+  <script>
+  const form = document.getElementById("requestForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {
+      song1: formData.get("song1"),
+      song2: formData.get("song2"),
+      name: formData.get("name"),
+      dedication: formData.get("dedication")
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbxTKXn2YjSe1uyYJ-TeqXWgPvcQhTuJWCXqG0JqV3byxr7UWjD6itc3uq2yTjpQeQ2k5w/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log("Success:", result);
+      window.location.href = "thankyou.html";
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Something went wrong. Please try again!");
+    });
+  });
+</script>
+
 </body>
 </html>
