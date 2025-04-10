@@ -6,26 +6,34 @@
   <title>Brady & Caroline Requests</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #111;
-      padding: 20px;
-      text-align: center;
-    }
-    img {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #111;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+}
+ img {
       width: 180px;
       margin-top: 10px;
       margin-bottom: 20px;
     }
-    .container {
-      max-width: 500px;
-      margin: auto;
-    }
-    input {
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      font-size: 16px;
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 20px; /* <-- Add this to keep spacing on both sides */
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box; /* <-- Important to respect padding */
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
     }
     .button, .venmo-button {
       padding: 14px 28px;
