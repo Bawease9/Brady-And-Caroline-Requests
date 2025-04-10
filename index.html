@@ -88,9 +88,14 @@
     e.preventDefault(); // Prevent page reload
 
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    const data = {
+      song1: formData.get("data[song1]"),
+      song2: formData.get("data[song2]"),
+      name: formData.get("data[name]"),
+      dedication: formData.get("data[dedication]")
+    };
 
-    fetch("https://script.google.com/macros/s/AKfycbwWd6jK4p7V23kJuTwluRhc1VFnpCrp0SZFnbQpmTxV-HxcPYNWaU3piEn0Ko5D3ODg/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbzm7Xkef199ncZrC6H9p-FCvO2FiAbZntA0NTzrMAmgnAoqwhERUY81UtO7cJte3_63/exec", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -108,6 +113,7 @@
     });
   });
 </script>
+
 
 
 </body>
