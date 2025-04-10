@@ -26,7 +26,7 @@
 
 input {
   width: 100%;
-  box-sizing: border-box; /* <-- Important to respect padding */
+  box-sizing: border-box;
   margin: 10px 0;
   padding: 12px;
   font-size: 16px;
@@ -34,35 +34,32 @@ input {
   border: 1px solid #ccc;
 }
 
-    }
-    .button, .venmo-button {
-      padding: 14px 28px;
-      margin-top: 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .button {
-      background: #111;
-      color: white;
-    }
-    .venmo-button {
-      background-color: #3D95CE;
-      color: white;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .venmo-button:hover {
-      background-color: #2f80b5;
-    }
-    h1 {
-      font-size: 1.7em;
-      margin: 20px 0;
-    }
-    .emoji {
-      font-size: 1.3em;
-      margin: 0 8px;
+.button, .venmo-button {
+  width: auto; /* ← Don't stretch buttons */
+  padding: 14px 28px;
+  margin-top: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.button {
+  background: #111;
+  color: white;
+}
+
+.venmo-button {
+  background-color: #3D95CE;
+  color: white;
+  text-decoration: none;
+}
+
+.venmo-button:hover {
+  background-color: #2f80b5;
+}
+
     }
   </style>
 </head>
