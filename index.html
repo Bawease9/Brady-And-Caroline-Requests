@@ -89,10 +89,10 @@
 
     const formData = new FormData(form);
     const data = {
-      song1: formData.get("data[song1]"),
-      song2: formData.get("data[song2]"),
-      name: formData.get("data[name]"),
-      dedication: formData.get("data[dedication]")
+      song1: formData.get("song1"),
+      song2: formData.get("song2"),
+      name: formData.get("name"),
+      dedication: formData.get("dedication")
     };
 
     fetch("https://script.google.com/macros/s/AKfycbzm7Xkef199ncZrC6H9p-FCvO2FiAbZntA0NTzrMAmgnAoqwhERUY81UtO7cJte3_63/exec", {
@@ -113,6 +113,7 @@
     });
   });
 </script>
+
 
 
 
