@@ -64,47 +64,21 @@
     <h1><span class="emoji">🎶</span> Make A Request <span class="emoji">🎶</span></h1>
 
     <form id="requestForm">
-  <input name="data[song1]" type="text" placeholder="Song Choice #1" required />
-  <input name="data[song2]" type="text" placeholder="Song Choice #2" />
-  <input name="data[dedication]" type="text" placeholder="Your Name / Special Dedication" />
-  <button class="button" type="submit">Submit Request</button>
-</form>
-<script>
-  const form = document.getElementById("requestForm");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // stop the page from reloading
-    fetch("https://sheetdb.io/api/v1/d8852m1f9bb64", {
-      method: "POST",
-      body: new FormData(form),
-    }).then(() => {
-      window.location.href = "thankyou.html";
-    });
-  });
-</script>
-
+      <input name="data[song1]" type="text" placeholder="Song Choice #1" required />
+      <input name="data[song2]" type="text" placeholder="Song Choice #2" />
+      <input name="data[dedication]" type="text" placeholder="Your Name / Special Dedication" />
+      <button class="button" type="submit">Submit Request</button>
+    </form>
 
     <a class="venmo-button" href="https://venmo.com/Brady-Wease" target="_blank">💸 Tip via Venmo</a>
   </div>
 
-  <script>
-    // Optional: redirect to thankyou.html after submission
-    const form = document.querySelector("form");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-      }).then(() => {
-        window.location.href = "thankyou.html";
-      });
-    });
-    <!-- Your form and content is here -->
-
+  <!-- ✅ Script goes here: only one! -->
   <script>
     const form = document.getElementById("requestForm");
 
     form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Stop the default form submission
+      e.preventDefault(); // Prevent page reload
 
       fetch("https://sheetdb.io/api/v1/d8852m1f9bb64", {
         method: "POST",
@@ -113,7 +87,7 @@
       .then(response => response.json())
       .then(data => {
         console.log("Success:", data);
-        window.location.href = "thankyou.html"; // redirect
+        window.location.href = "thankyou.html"; // Redirect to thank you page
       })
       .catch(error => {
         console.error("Error:", error);
@@ -121,7 +95,5 @@
       });
     });
   </script>
-
 </body>
 </html>
-
