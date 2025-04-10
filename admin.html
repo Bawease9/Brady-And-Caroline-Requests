@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brady & Caroline Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background: #111;
+      color: white;
+    }
+    .played {
+      background-color: #c8e6c9;
+    }
+    button {
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .sort-buttons {
+      margin-bottom: 20px;
+    }
+    .sort-buttons button {
+      margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎹 Admin Dashboard</h1>
+  <div class="sort-buttons">
+    <button onclick="sortByName()">Sort A-Z</button>
+    <button onclick="sortByNewest()">Sort Newest</button>
+  </div>
+  <table id="requestsTable">
+    <thead>
+      <tr>
+        <th>Song #1</th>
+        <th>Song #2</th>
+        <th>Dedication</th>
+        <th>Played?</th>
+      </tr>
+    </thead>
+    <tbody id="requestBody">
+      <!-- Filled by JS -->
+    </tbody>
+  </table>
+
+  <script>
+    let requestData = [];
+
+    fetch("https://sheetdb.io/api/v1/d8852m1f9bb64")
+      .then(res => res.json())
+      .then(data => {
+        requestData = data.reverse(); // newest first
+        displayRequests(requestData);
+      });
+
+    function displayRequests(data) {
+      const tbody = document.getElementById("requestBody");
+      tbody.innerHTML = "";
+      data.forEach((row, index) => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${row.song1 || ""}</td>
+          <td>${row.song2 || ""}</td>
+          <td>${row.dedication || ""}</td>
+          <td><button onclick="markPlayed(this)">Mark Played</button></td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function markPlayed(button) {
+      const row = button.closest("tr");
+      row.classList.add("played");
+      button.disabled = true;
+      button.textContent = "Played";
+    }
+
+    function sortByName() {
+      const sorted = [...requestData].sort((a, b) =>
+        (a.song1 || "").localeCompare(b.song1 || "")
+      );
+      displayRequests(sorted);
+    }
+
+    function sortByNewest() {
+      displayRequests([...requestData].reverse());
+    }
+  </script>
+</body>
+</html>
