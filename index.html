@@ -69,7 +69,7 @@
     <img src="logo.png" alt="Brady and Caroline Logo" />
     <h1><span class="emoji">🎶</span> Make A Request <span class="emoji">🎶</span></h1>
 
-    <form id="requestForm">
+    <form id="requestForm" target="_blank" action="thankyou.html">
       <input name="song1" type="text" placeholder="Song Choice #1" required />
       <input name="song2" type="text" placeholder="Song Choice #2" />
       <input name="name" type="text" placeholder="Your Name" />
@@ -79,43 +79,5 @@
 
     <a class="venmo-button" href="https://venmo.com/Brady-Wease" target="_blank">💸 Tip via Venmo</a>
   </div>
-
-  <script>
-    const form = document.getElementById("requestForm");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      const data = {
-        song1: formData.get("song1"),
-        song2: formData.get("song2"),
-        name: formData.get("name"),
-        dedication: formData.get("dedication")
-      };
-
-      fetch("https://script.google.com/macros/s/AKfycbzm7Xkef199ncZrC6H9p-FCvO2FiAbZntA0NTzrMAmgnAoqwhERUY81UtO7cJte3_63/exec", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // or use .text() if your script returns plain text
-      })
-      .then(result => {
-        console.log("Success:", result);
-        window.location.href = "thankyou.html";
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("Something went wrong. Please try again!");
-      });
-    });
-  </script>
 </body>
 </html>
