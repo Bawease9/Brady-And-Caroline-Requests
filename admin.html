@@ -2,79 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Brady & Caroline Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Brady & Caroline</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f3f3f3;
+      color: #111;
       padding: 20px;
       text-align: center;
     }
-    h1 {
-      margin-bottom: 20px;
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-collapse: collapse;
     }
-    #requests {
-      max-width: 600px;
-      margin: auto;
-    }
-    .request-card {
-      background: #fff;
-      padding: 15px;
-      margin-bottom: 10px;
+    th, td {
+      padding: 12px;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      text-align: left;
     }
-    .played {
-      opacity: 0.4;
-      text-decoration: line-through;
+    th {
+      background-color: #111;
+      color: white;
     }
     button {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: #333;
+      padding: 8px 16px;
+      background-color: #e74c3c;
       color: white;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #c0392b;
     }
   </style>
 </head>
 <body>
-  <h1>🎹 Admin Request Dashboard 🎹</h1>
-  <div id="requests"></div>
+  <h1>🎹 Admin Dashboard 🎶</h1>
+  <table id="requestsTable">
+    <thead>
+      <tr>
+        <th>Song #1</th>
+        <th>Song #2</th>
+        <th>Dedication</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Requests will load here -->
+    </tbody>
+  </table>
 
   <script>
-    async function loadRequests() {
-      const response = await fetch("https://sheetdb.io/api/v1/d8852m1f9bb64");
-      const data = await response.json();
+    const API_URL = "https://sheetdb.io/api/v1/d8852m1f9bb64";
 
-      const requestsDiv = document.getElementById("requests");
-      requestsDiv.innerHTML = "";
+    function loadRequests() {
+      fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#requestsTable tbody");
+          tbody.innerHTML = "";
 
-      data.forEach((entry, index) => {
-        const item = document.createElement("div");
-        item.className = "request-card";
-        item.innerHTML = `
-          <strong>Request #${index + 1}</strong><br/>
-          🎵 <strong>Song 1:</strong> ${entry.song1 || ""}<br/>
-          🎵 <strong>Song 2:</strong> ${entry.song2 || ""}<br/>
-          💌 <strong>Dedication:</strong> ${entry.dedication || "N/A"}<br/>
-          <button onclick="markAsPlayed(this)">Mark as Played</button>
-        `;
-        requestsDiv.appendChild(item);
+          data.forEach((row, index) => {
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+              <td>${row.song1 || ""}</td>
+              <td>${row.song2 || ""}</td>
+              <td>${row.dedication || ""}</td>
+              <td><button onclick="deleteRequest('${row.song1}', '${row.song2}', '${row.dedication}')">Mark as Played</button></td>
+            `;
+
+            tbody.appendChild(tr);
+          });
+        });
+    }
+
+    function deleteRequest(song1, song2, dedication) {
+      fetch(`${API_URL}/search`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          song1: song1,
+          song2: song2,
+          dedication: dedication
+        })
+      })
+      .then(() => {
+        loadRequests(); // refresh the table
       });
     }
 
-    function markAsPlayed(button) {
-      const card = button.parentElement;
-      card.classList.add("played");
-      button.disabled = true;
-      button.innerText = "Played";
-    }
-
-    loadRequests(); // Load initially
-    setInterval(loadRequests, 1000); // Auto-refresh every second
+    // Initial load + auto refresh every 5 seconds
+    loadRequests();
+    setInterval(loadRequests, 5000);
   </script>
 </body>
 </html>
