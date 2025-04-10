@@ -69,13 +69,12 @@
     <img src="logo.png" alt="Brady and Caroline Logo" />
     <h1><span class="emoji">🎶</span> Make A Request <span class="emoji">🎶</span></h1>
 
-    <!-- Replace the action URL below with your real Fireform or Formsubmit URL -->
-    <form method="POST" action="https://submit.fireform.co/your-form-id">
-      <input name="data[song1]" type="text" placeholder="Song Choice #1" required />
-      <input name="data[song2]" type="text" placeholder="Song Choice #2" />
-      <input name="data[name]" type="text" placeholder="Your Name" />
-      <input name="data[dedication]" type="text" placeholder="Special Dedication" />
-      <input type="hidden" name="_redirect" value="https://brady-and-caroline-requests.vercel.app/thankyou.html" />
+    <!-- ✅ This will redirect to thankyou.html on submit -->
+    <form action="thankyou.html" method="GET">
+      <input name="song1" type="text" placeholder="Song Choice #1" required />
+      <input name="song2" type="text" placeholder="Song Choice #2" />
+      <input name="name" type="text" placeholder="Your Name" />
+      <input name="dedication" type="text" placeholder="Special Dedication" />
       <button class="button" type="submit">Submit Request</button>
     </form>
 
@@ -83,5 +82,4 @@
   </div>
 </body>
 </html>
-
 
